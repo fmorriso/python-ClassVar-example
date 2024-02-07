@@ -1,9 +1,10 @@
 from typing import ClassVar
+from school import School
 
 
 class Student:
-    # Class variable
-    school_name: ClassVar[str] = 'ABC School '
+    # Class variable (e.g., equivalent to static variable in Java and C#)
+    __school: ClassVar[str] = School('ABC School', '123 Main Street', 1600)
 
     # constructor
     def __init__(self, name: str, roll_no: int):
@@ -12,7 +13,15 @@ class Student:
 
     # Instance method
     def show(self):
-        print(self.name, self.roll_no, Student.school_name)
+        # check for shadow variable the same names as the class variable
+        if self.__school is None:
+            print(self.name, self.roll_no, Student.__school)
+        else:
+            print(self.name, self.roll_no, self.__school)
 
     def __repr__(self):
-        return f'name: {self.name}, roll_no: {self.roll_no}, school: {Student.school_name}'
+        # check for shadow variable the same names as the class variable
+        if self.__school is None:
+            return f'name: {self.name}, roll_no: {self.roll_no}, _school: {Student.__school}'
+        else:
+            return f'name: {self.name}, roll_no: {self.roll_no}, _school: {self.__school}'

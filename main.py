@@ -1,5 +1,7 @@
 import sys
 from student import Student
+from school import School
+
 def get_python_version() -> str:
 	return f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
 
@@ -14,19 +16,9 @@ if __name__ == '__main__':
 
 
     s2 = Student('Vishnu', 11)
-    print(f's2: {s2}')
-    # create a variable that "shadows" the class variable of the same
-    s2.school_name = 'XYZ school'
-    print(f's2: {s2}')
-    print(f's2.school_name: {s2.school_name}')
-    # does s1 have a school_name instance variable?
-    if s1.school_name is None:
-        print('s1 does not have a school_name')
-    else:
-        if s1.school_name == Student.school_name:
-            print(f's1.school_name is identical to Student.school_name: {s1.school_name}')
-        else:
-            print(f's1.school_name is different from Student.school_name: {s1.school_name}')
-
-
-
+    print(f'before s2: {s2}')
+    # WARNING: this will create a variable that "shadows" the class variable of the same name
+    s2.__school = School('XYZ_School', '9876 E. Main', 1700)
+    print(f'after  s2: {s2}')
+    print(f'after s2.__school: {s2.__school}')
+    s2.show()
