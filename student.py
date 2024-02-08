@@ -21,7 +21,8 @@ class Student:
 
     def __repr__(self):
         # check for shadow variable the same names as the class variable
-        if self.__school is None:
-            return f'name: {self.name}, roll_no: {self.roll_no}, _school: {Student.__school}'
+        if hasattr(self, '__school'):
+            return f'name: {self.name}, roll_no: {self.roll_no}, __school (instance): {self.__school}'
         else:
-            return f'name: {self.name}, roll_no: {self.roll_no}, _school: {self.__school}'
+            return f'name: {self.name}, roll_no: {self.roll_no}, __school (ClassVar): {Student.__school}'
+
